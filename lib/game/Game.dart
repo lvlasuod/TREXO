@@ -84,8 +84,6 @@ class TRexGame extends BaseGame {
   void doGameOver() {
     this.gameOverPanel.visible = true;
     scoreComponent.stopScore();
-    //scoreComponent.secondsRun=0;
-
     stop();
     tRex.status = TRexStatus.crashed;
   }
@@ -98,6 +96,7 @@ class TRexGame extends BaseGame {
     status = TRexGameStatus.playing;
     tRex.reset();
     horizon.reset();
+    scoreComponent.secondsRun=0;
     scoreComponent.startScore();
     currentSpeed = GameConfig.speed;
     gameOverPanel.visible = false;
