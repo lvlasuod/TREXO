@@ -9,14 +9,12 @@ import 'package:run_trex/game/game_over/config.dart';
 class GameOverPanel extends PositionComponent
     with Resizable, ComposedComponent {
   bool visible = false;
-
   GameOverText gameOverText;
   GameOverRestart gameOverRestart;
 
   GameOverPanel(Image spriteImage) : super() {
     gameOverText = GameOverText(spriteImage);
     gameOverRestart = GameOverRestart(spriteImage);
-
     components..add(gameOverText)..add(gameOverRestart);
   }
 
@@ -50,6 +48,7 @@ class GameOverText extends SpriteComponent with Resizable {
     x = (size.width / 2) - width / 2;
   }
 }
+
 
 class GameOverRestart extends SpriteComponent with Resizable {
   GameOverRestart(Image spriteImage)

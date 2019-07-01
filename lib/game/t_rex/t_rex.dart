@@ -12,7 +12,6 @@ enum TRexStatus { crashed, ducking, jumping, running, waiting, intro }
 
 class TRex extends PositionComponent with ComposedComponent, Resizable {
   bool isIdle = true;
-
   TRexStatus status = TRexStatus.waiting;
 
   WaitingTRex idleDino;

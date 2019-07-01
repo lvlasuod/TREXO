@@ -5,6 +5,7 @@ import 'package:run_trex/game/horizon/horizon.dart';
 import 'package:run_trex/game/collision/collision_utils.dart';
 import 'package:run_trex/game/game_config.dart';
 import 'package:run_trex/game/game_over/game_over.dart';
+import 'package:run_trex/game/score/score_c.dart';
 import 'package:run_trex/game/t_rex/config.dart';
 import 'package:run_trex/game/t_rex/t_rex.dart';
 
@@ -14,6 +15,7 @@ class TRexGame extends BaseGame {
   TRex tRex;
   Horizon horizon;
   GameOverPanel gameOverPanel;
+  ScoreComponent scoreComponent;
   TRexGameStatus status = TRexGameStatus.waiting;
 
   double currentSpeed = GameConfig.speed;
@@ -23,8 +25,9 @@ class TRexGame extends BaseGame {
     tRex = new TRex(spriteImage);
     horizon = new Horizon(spriteImage);
     gameOverPanel = new GameOverPanel(spriteImage);
+    scoreComponent=ScoreComponent();
 
-    this..add(horizon)..add(tRex)..add(gameOverPanel);
+    this..add(horizon)..add(tRex)..add(gameOverPanel)..add(scoreComponent);
   }
 
   void onTap() {
@@ -38,6 +41,9 @@ class TRexGame extends BaseGame {
   @override
   void update(double t) {
     tRex.update(t);
+   // print("Second ${scoreComponent.secondsRun}");
+
+    scoreComponent.update(t);
     horizon.updateWithSpeed(0.0, this.currentSpeed);
 
     if (gameOver) return;
@@ -66,6 +72,7 @@ class TRexGame extends BaseGame {
   }
 
   void startGame() {
+    scoreComponent.startScore();
     tRex.status = TRexStatus.running;
     status = TRexGameStatus.playing;
     tRex.hasPlayedIntro = true;
@@ -76,6 +83,9 @@ class TRexGame extends BaseGame {
 
   void doGameOver() {
     this.gameOverPanel.visible = true;
+    scoreComponent.stopScore();
+    //scoreComponent.secondsRun=0;
+
     stop();
     tRex.status = TRexStatus.crashed;
   }
@@ -88,6 +98,7 @@ class TRexGame extends BaseGame {
     status = TRexGameStatus.playing;
     tRex.reset();
     horizon.reset();
+    scoreComponent.startScore();
     currentSpeed = GameConfig.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
