@@ -1,6 +1,8 @@
 # run_trex
 
 A new Flutter game with flame
+![Screenshot](/sc1.jpg?raw=true "Murdered-Fly-Suspect")
+![Screenshot](/sc2.jpg?raw=true "Murdered-Fly-Suspect")
 
 ## Getting Started
 
